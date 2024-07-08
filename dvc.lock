@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - path: data/external/student_placement_large.csv
+      hash: md5
+      md5: a80a0730b288e20d189397321d4e8e1d
+      size: 12367
+    - path: src/data/make_dataset.py
+      hash: md5
+      md5: e1e1c91e203178760e2ab6a0d345088b
+      size: 1537
+    outs:
+    - path: data/interim/
+      hash: md5
+      md5: a53f71aadc0f4b934945814305373d44.dir
+      size: 17276
+      nfiles: 2
+  feature_eng:
+    cmd: python src/features/build_features.py
+    deps:
+    - path: data/interim/
+      hash: md5
+      md5: a53f71aadc0f4b934945814305373d44.dir
+      size: 17276
+      nfiles: 2
+    - path: src/features/build_features.py
+      hash: md5
+      md5: 98daca693a0f94d305d94559495655d2
+      size: 1788
+    outs:
+    - path: data/processed/
+      hash: md5
+      md5: ad12efb56fede0fa8b6c9fae756a2f1e.dir
+      size: 21475
+      nfiles: 2
+  model_training:
+    cmd: python src/models/train_model.py
+    deps:
+    - path: data/processed/
+      hash: md5
+      md5: ad12efb56fede0fa8b6c9fae756a2f1e.dir
+      size: 21475
+      nfiles: 2
+    - path: src/models/train_model.py
+      hash: md5
+      md5: d051041d3d16e7146e6c6231cb579d00
+      size: 1543
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: c897e412dafc562cbb9219431c9fbc27
+      size: 2724913
+  metrics:
+    cmd: python src/models/predict_model.py
+    deps:
+    - path: data/processed/
+      hash: md5
+      md5: ad12efb56fede0fa8b6c9fae756a2f1e.dir
+      size: 21475
+      nfiles: 2
+    - path: models/model.pkl
+      hash: md5
+      md5: c897e412dafc562cbb9219431c9fbc27
+      size: 2724913
+    - path: src/models/predict_model.py
+      hash: md5
+      md5: 85aab1619e6de9acbb45035b61d79dd2
+      size: 2392
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: d576a697707936abec7adbf78ddcdb9f
+      size: 98

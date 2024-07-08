@@ -1,0 +1,30 @@
+stages:
+  data_ingestion:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - data/external/student_placement_large.csv
+    - src/data/make_dataset.py
+    outs:
+    - data/interim/
+  feature_eng:
+    cmd: python src/features/build_features.py
+    deps:
+    - data/interim/
+    - src/features/build_features.py
+    outs:
+    - data/processed/
+  model_training:
+    cmd: python src/models/train_model.py
+    deps:
+    - data/processed/
+    - src/models/train_model.py
+    outs:
+    - models/model.pkl
+  metrics:
+    cmd: python src/models/predict_model.py
+    deps:
+    - data/processed/
+    - models/model.pkl
+    - src/models/predict_model.py
+    metrics:
+    - metrics.json
