@@ -45,7 +45,7 @@ def main():
     train_data = load_data('./data/processed/train_processed.csv')
     
 
-    n_estimator = param_load('parmas.yaml')
+    n_estimator = param_load('params.yaml')
     rf =  RandomForestClassifier(n_estimators=n_estimator)
 
     rf.fit(train_data.drop(columns='Placed'),train_data['Placed'])
