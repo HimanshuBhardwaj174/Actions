@@ -67,7 +67,7 @@ def main():
         logger.info('f1_score')
         live.log_metric('f1_score',f1_score(y_true=test_data['Placed'],y_pred=y_pred))
 
-        live.log_param('N_estimator',n_estimator)
+    
 
 
 
