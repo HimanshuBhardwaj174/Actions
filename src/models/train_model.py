@@ -53,6 +53,8 @@ def main():
     logger.info('Saved Model')
     model_save('models',rf)
 
+    with Live(save_dvc_exp=True) as live:
+        live.log_param('n_estimator',n_estimator)
 
 
 
