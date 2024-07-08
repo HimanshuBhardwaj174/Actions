@@ -1,0 +1,2 @@
+model_training:
+  n_estimator : 100

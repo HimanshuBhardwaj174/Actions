@@ -7,7 +7,7 @@ from dvclive import Live
 import logging
 import pickle
 import os
-
+import yaml
 def setup_logging():
     # Create a logger
     logger = logging.getLogger(__name__)
@@ -36,14 +36,16 @@ def model_save(loc,model):
     with open(os.path.join(loc,'model.pkl'),'wb') as f:
         pickle.dump(model,f)
 
-
-
+def param_load(loc):
+    with open(loc,'r') as f:
+        val = yaml.safe_load(f)['model_training']['n_estimator']
+    return val
 def main():
     logger = setup_logging()
     train_data = load_data('./data/processed/train_processed.csv')
     
 
-    n_estimator = 100
+    n_estimator = param_load('parmas.yaml')
     rf =  RandomForestClassifier(n_estimators=n_estimator)
 
     rf.fit(train_data.drop(columns='Placed'),train_data['Placed'])
