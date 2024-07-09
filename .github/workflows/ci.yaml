@@ -1,12 +1,16 @@
-name : CI
+name : CI-v2
 
-on : workflow_dispatch
+on : push
 
 jobs:
-  Test1 :
-    runs-on : ubuntu-latest
-    steps:
-      - name : 'Print Hi Mom'
-        run : echo 'Hi Mummy'
-      - name : 'Print Hi Dad'
-        run : echo 'Hi Papa'
+  name : Complete
+  runs-on : windows-latest
+  steps:
+    - name : Code Loaded
+      uses : actions/checkout@v3
+    - name : Setup Python
+      uses : actions/setup-python@v4
+    - name : install dependencies
+      run : pip install -r requirements.txt
+    - name : Run Code
+      run : dvc repro
