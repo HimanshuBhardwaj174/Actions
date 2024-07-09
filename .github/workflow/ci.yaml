@@ -1,0 +1,12 @@
+name : CI
+
+on : workflow_dispatch
+
+jobs:
+  Test1 :
+    runs-on : ubuntu-latest
+    steps:
+      - name : 'Print Hi Mom'
+        run : echo 'Hi Mummy'
+      - name : 'Print Hi Dad'
+        run : echo 'Hi Papa'
