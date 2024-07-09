@@ -3,7 +3,7 @@ name : CI-v2
 on : push
 
 jobs:
-  name : Complete
+  Complete: 
   runs-on : windows-latest
   steps:
     - name : Code Loaded
