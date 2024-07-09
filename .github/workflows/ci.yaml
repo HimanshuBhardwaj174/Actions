@@ -4,7 +4,7 @@ on : push
 
 jobs:
   Complete: 
-  runs-on : windows-latest
+  runs-on : ubuntu-latest
   steps:
     - name : Code Loaded
       uses : actions/checkout@v3
