@@ -3,3 +3,4 @@ numpy
 dvc
 dvclive
 scikit-learn
+dvc-gdrive

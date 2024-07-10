@@ -13,4 +13,6 @@ jobs:
       - name : install dependencies
         run : pip install -r requirements.txt
       - name : Run Code
-        run : dvc repro
+        run : |
+          dvc pull
+          dvc repro
